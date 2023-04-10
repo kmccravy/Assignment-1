@@ -3,42 +3,56 @@
 
   <head>
     <meta charset='utf-8' />
-    <title>University of Oregon Mapping</title>
+    <title>Creede, Colorado</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css' rel='stylesheet' />
-      
-    <div id='map'></div>
 
     <style>
-        /* Insert the CSS code here between the <style> tags */
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
-
-
+        #title { z-index: 9999; background-color:white; opacity: 80%; text-align: center}   
+        h1 {color: rebeccapurple; font-family: verdana; font-size: 45px;}
+        h2 {color: mediumpurple; font-family: verdana; font-size: 20px;}
     </style>
   </head>
 
   <body>
-    <!--  Insert the map div here in the <body> of the page  -->
-   
-    <!--  Insert the tile div here (part V) -->
+      
+    <div id='map'></div>
+    <div id='title'>
+        <h1>Map of Creede, Colorado</h1>
+        <h2>Where to stay during your visit</h2>
+ 	</div>
 
-    <script>
-        // Insert the JavaScript within the <script> tags, within the body   
+    <script>  
         // Start with the Mapbox access token here 
         mapboxgl.accessToken = 'pk.eyJ1Ijoia21jY3JhdnkiLCJhIjoiY2xnNWgwOXcwMDEwdjNrcGZtZTJraTVxdiJ9.Pkhl3GGwITAY0wmENm24hQ';
    
         // Then initialize the map here
-   
-    
+        var map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/outdoors-v12',
+            center: [-106.926434, 37.849166], 
+            zoom: 12
+        });
 
         // Add popup markers here  (part IV)
+         var popup = new mapboxgl.Popup({ offset: 25 })
+            .setHTML('Welcome to Creede!');
+        
+         var popup_layer = new mapboxgl.Popup({closeOnClick: false, anchor: 'top-left'})
+            .setLngLat([-106.976353, 37.813737])
+            .setHTML('<a href="https://www.antlerslodge.com/">Come stay at Antlers Lodge!</a>')
+            .addTo(map);
         
         // Add any other variables such as markers here (part III)
+        var marker = new mapboxgl.Marker({color:'rebeccapurple'})
+            .setLngLat([-106.926434, 37.849166])
+            .setPopup(popup)
+            .addTo(map);
 
-        // Add optional advanced "On load" function here
         
     </script>
 
